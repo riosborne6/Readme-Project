@@ -11,12 +11,12 @@ const questions = [
   {
     type: "input",
     name: "title",
-    message: "What is your name?",
+    message: "What is the title of your readme",
   },
   {
     type: "input",
     name: "description",
-    message: "What is your height?",
+    message: "What is the description of your readme",
   },
   {
     type: "list",
@@ -26,22 +26,37 @@ const questions = [
   },
   {
     type: "input",
-    name: "description",
-    message: "What is your height?",
+    name: "instalInstruct",
+    message: "What are the installation instructions?",
+  },
+  {
+    type: "input",
+    name: "usageInfo",
+    message: "What is the usage information?",
+  },
+  {
+    type: "input",
+    name: "contGuide",
+    message: "What are the contribution guidelines",
+  },
+  {
+    type: "input",
+    name: "testInstruct",
+    message: "What are the test instructions",
   },
 ];
-
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
   // fs.writeFile(filename, data, [encoding], [callback]);
-  fs.writeFile("test.txt", "test", function (err) {});
+  fs.writeFile(`${fileName}.md`, data, function (err) {
+    console.log(err);
+  });
 }
 
 // TODO: Create a function to initialize app
 function init() {
   inquirer.prompt(questions).then((answers) => {
-    generateMarkdown(answers);
-    writeToFile("", "");
+    writeToFile(answers.title, generateMarkdown(answers));
   });
 }
 
